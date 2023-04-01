@@ -24,16 +24,16 @@ jobs:
           npm install && cd api && npm install && cd ..
           npm run build
 
-      - name: 📂 Upload Site
-        uses: SamKirkland/FTP-Deploy-Action@4.3.1
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          port: 21
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          local-dir: build/
-          server-dir: /home/minicms/public_html/
+#       - name: 📂 Upload Site
+#         uses: SamKirkland/FTP-Deploy-Action@4.3.1
+#         with:
+#           server: ${{ secrets.FTP_HOST }}
+#           username: ${{ secrets.FTP_USER }}
+#           port: 21
+#           password: ${{ secrets.FTP_PASSWORD }}
+#           protocol: ftp
+#           local-dir: build/
+#           server-dir: /home/minicms/public_html/
       - name: Restart App
         uses: appleboy/ssh-action@v0.1.6
         with:
