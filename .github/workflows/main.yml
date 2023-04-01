@@ -33,7 +33,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           local-dir: build/
-          server-dir: /home/minicms/public_html
+          server-dir: /home/minicms/public_html/
       - name: Restart App
         uses: appleboy/ssh-action@v0.1.6
         with:
