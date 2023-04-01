@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently 'cd api2 && npm run dev'",
-    "dev:frontend": "vite",
-    "dev:backend": "node ./api2/index.js",
+    "dev": "concurrently 'npm run dev:backend' 'npm run dev:frontend'",
+    "dev:frontend": "vite --open",
+    "dev:backend": "cd api2 && npm run dev",
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json"
