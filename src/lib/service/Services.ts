@@ -1,15 +1,45 @@
 import { BaseService } from "./base/BaseService";
+import { store } from "$lib/globalStore/store";
+import type { userType } from "$lib/types/userType";
+
 
 type User = {
   name: string;
   email: string;
-  age: number;
+  age?: number;
   id: number;
 };
 
 class UserServiceClass extends BaseService<User> {
   constructor() {
     super("/users");
+  }
+
+  async signIn(user: userType){
+    try {
+        const res = await this.fetch('/signin', 'POST', user)
+        console.log("user signed in:",res)
+        if(res?.statusText == 'OK' ){
+          store.update(oldValue => {
+            let newValue = oldValue
+            newValue.user = res.data
+            return newValue
+          })
+        }
+        return res
+    } catch (error) {
+        console.log(error.message)
+    }
+  }
+
+  async signUp(user: userType){
+    try {
+      console.log('signing up: ', user)
+        const res =await UserService.insert(user)
+        return res
+    } catch (error) {
+        console.log(error.message)
+    }
   }
 }
 

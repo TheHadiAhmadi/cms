@@ -117,5 +117,7 @@
 </script>
 
 <AppFormField {state} {hint} {name} {validate} {...$$restProps} bind:value>
-  <Input {...$$restProps} {required} {min} {max} {type} {state} bind:value />
+  <Input {...$$restProps} {required} {min} {max} {type} {state} bind:value >
+    <slot></slot>
+  </Input>
 </AppFormField>

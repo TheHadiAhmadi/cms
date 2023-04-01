@@ -1,7 +1,7 @@
 <script>
-  import { El } from "yesvelte";
+  export const title= 'Dashboard'
 </script>
 
-<El tag="h1">
-  <slot />
-</El>
+<svelte:head>
+  <title>{title}</title>
+</svelte:head>
