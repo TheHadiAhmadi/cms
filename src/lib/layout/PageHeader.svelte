@@ -4,7 +4,7 @@
   export let title: string | undefined = undefined;
 </script>
 
-<El pt="4" pb="3" d="flex" alignItems="center" justifyContent="between">
+<El mb="0" pt="4" pb="0" d="flex" alignItems="center" justifyContent="between">
   {#if title}
     <PageTitle>{title}</PageTitle>
   {/if}
