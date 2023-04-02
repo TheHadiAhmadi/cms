@@ -11,7 +11,7 @@
     "build:frontend": "vite build",
     "build:backend": "node scripts/build.js",
     "preview": "vite preview",
-    "start": "node build/server.js",
+    "start": "cd build && node server.js",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {

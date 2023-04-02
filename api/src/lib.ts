@@ -24,10 +24,10 @@ export function createApp({port = 3000, services = {}, models = {}}: AppParams):
     app.use(morgan('common'))
 
     
-    app.use('/admin', serve('./build/public'))
+    app.use('/admin', serve('./public'))
 
     app.use('/admin/*', (req, res) => {
-        res.end(fs.readFileSync('./build/public/index.html', 'utf-8'))
+        res.end(fs.readFileSync('./public/index.html', 'utf-8'))
     })
 
     const { PORT = port } = process.env
