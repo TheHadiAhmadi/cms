@@ -1,0 +1,60 @@
+<AuthProvider>
+  <Router >
+  <Route let:location path='/*'>
+    
+    <!-- public routes -->
+    <Route  path="/" ><Profile /></Route> <!-- preview of website home page width out any privilages -->
+    
+    <!-- Dynamic routes -->
+    
+        {#if checkRoute(location.pathname)}
+        <Route path={location.pathname} >
+          <svelte:component this={dynamicContent}></svelte:component>
+        </Route>
+        {/if}
+    <!-- Note
+      there should be a list of dynamic public routes that is  loaded from backend
+      and stored in the globalStore.
+      Dynamic routes and pages are created by plugins and other stuffs.
+      for any incoming route search the globalstore for route and content.
+    -->
+    <!-- -------------- -->
+    
+    <Route path="/signup"><SignUp /> </Route>
+    <Route path="/signin"><SignIn /> </Route>
+    <Route path="/unauthorized"><El>unauthorized</El> </Route>
+    <Route path="/unautheticated"><El>unauthorized</El> </Route>
+    <!-- --------------- -->
+
+    <!-- protected routes -->
+    <Route path="/admin/*">
+      <ProtectedRoute requiredRoll='admin'>
+        <Route path='/'><Admin /></Route> <!-- admin panel -->
+        <Route path='/profile'><AdminProfile /></Route> <!-- preview of the website with admin previlages shown  -->
+
+        <!-- Dynamic routes -->
+        {#if checkRoute(location.pathname, true)}
+        <Route path='*' >
+          <svelte:component this={dynamicContent}></svelte:component>
+        </Route>
+        {/if}
+        <!-- Note
+          there should be a list of dynamic public routes that is  loaded from backend
+          and stored in the globalStore.
+          Dynamic routes and pages are created by plugins and other stuffs.    
+          for any incoming route search the globalstore for route and content.
+        -->
+        <!-- ------------- -->
+
+      </ProtectedRoute>
+      <Route ><PageNotFound /></Route>
+    </Route>
+
+    <!-- --------------- -->
+
+    <!-- for all of unknown routes would result to page not found -->
+    <Route ><PageNotFound /></Route>
+    <!-- --------------- -->
+  </Route>
+  </Router>
+</AuthProvider>
