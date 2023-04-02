@@ -33,7 +33,7 @@ output.then(value => {
         if(!existsSync('./build')) {
             mkdirSync('./build')
         }
-        renameSync('./api/server.js', './build/server.js')
+        renameSync('./api/server.js', './build/server.cjs')
     }))
 })
 

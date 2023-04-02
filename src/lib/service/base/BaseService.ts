@@ -1,4 +1,6 @@
 import { API_URL } from "$lib/config";
+import { store } from "$lib/globalStore/store";
+import { get } from "svelte/store";
 
 export type SortParams = {
   field: string;
@@ -31,13 +33,35 @@ export class BaseService<T> {
     method: string = "GET",
     body: any = undefined
   ): Promise<T> {
-    return fetch(API_URL + this.path + pathname, {
+    let res = fetch(API_URL + this.path + pathname, {
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bareer ${get(store).user.accessToken}`
       },
-      method,
-      body: body ? JSON.stringify(body) : undefined,
+      method: method,
+      body: body? JSON.stringify(body) : undefined,
     }).then((res) => res.json());
+
+    if(res?.statusText === 'OK'){
+      return res
+    }else{
+      res = fetch(API_URL + "/users/refresh", {
+        headers: {
+          method: 'GET',
+          "Content-type": "application/json",
+        }
+      }).then((d) =>d.json())
+
+      if(res?.statusText !== 'OK'){
+        store.update( value =>{
+          let newValue = value
+          newValue.user.accessToken = res.data.accessToken
+          return newValue
+        })
+        this.fetch(pathname, method, body)
+      }
+      return res
+    }
   }
 
   async insert(body: any): Promise<T> {
