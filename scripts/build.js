@@ -26,7 +26,7 @@ const output = rollup({
 
 output.then(value => {
     value.write({
-        // format: 'commonjs',
+        format: 'commonjs',
         file: './server.js'
     }).then((res => {
         process.chdir('..')
