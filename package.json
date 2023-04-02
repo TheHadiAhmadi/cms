@@ -6,25 +6,43 @@
   "scripts": {
     "dev": "concurrently 'npm run dev:backend' 'npm run dev:frontend'",
     "dev:frontend": "vite --open",
-    "dev:backend": "cd api2 && npm run dev",
-    "build": "vite build",
+    "dev:backend": "cd api && npm run dev",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:frontend": "vite build",
+    "build:backend": "node scripts/build.js",
     "preview": "vite preview",
+    "start": "cd build && node server.js",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.0.2",
     "@tsconfig/svelte": "^3.0.0",
+    "@types/morgan": "^1.9.4",
     "svelte": "^3.55.1",
     "svelte-check": "^2.10.3",
     "tinro": "^0.6.12",
     "tslib": "^2.5.0",
     "typescript": "^4.9.3",
-    "vite": "^4.1.0"
+    "vite": "^4.1.0",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript": "^1.0.1",
+    "vite-plugin-mix": "^0.4.0"
   },
   "dependencies": {
     "concurrently": "^7.6.0",
     "svelte-navigator": "^3.2.2",
     "yesvelte": "^0.0.2-next.77",
     "yup": "^1.0.0"
+  },
+  "overrides": {
+    "vite-plugin-mix": {
+      ".": "^0.4.0",
+      "vite": "^4.1.0"
+    }
   }
 }

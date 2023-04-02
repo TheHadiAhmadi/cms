@@ -1,4 +1,4 @@
-import { services } from './services/index.js'
+import { services } from './services'
 import {createApp,} from './lib.js'
 // import {BaseModel} from './Model'
 
@@ -10,6 +10,9 @@ import {createApp,} from './lib.js'
 
 // const UserModel = BaseModel
 // const BaseModel
+
+
+
 
 createApp({
     port: 3000,

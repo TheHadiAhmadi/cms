@@ -14,6 +14,7 @@
     border="0"
     on:click={() => (offcanvasOpen = !offcanvasOpen)}
   >
+  {offcanvasOpen}
     <Icon pack="material-symbols" name="menu" />
   </Button>
   <Button

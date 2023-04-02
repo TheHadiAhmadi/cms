@@ -1,9 +1,13 @@
 import polka, { Polka } from 'polka'
 import cors from 'cors'
-import {onError, jsonMiddleware} from './utils.js'
+import {onError} from './utils.js'
+import {json} from 'body-parser'
 import {registerService} from './service.js'
 import {Model} from './model.js'
 import { Service } from './types.js'
+import fs from 'fs'
+import serve from 'serve-static'
+import morgan from 'morgan'
 // import knex from 'knex'
 
 export type AppParams = {
@@ -16,8 +20,15 @@ export function createApp({port = 3000, services = {}, models = {}}: AppParams):
     const app = polka({onError})
     
     app.use(cors())
-    app.use(jsonMiddleware())
+    app.use(json())
+    app.use(morgan('common'))
 
+    
+    app.use('/admin', serve('./public'))
+
+    app.use('/admin/*', (req, res) => {
+        res.end(fs.readFileSync('./public/index.html', 'utf-8'))
+    })
 
     const { PORT = port } = process.env
 
@@ -26,7 +37,7 @@ export function createApp({port = 3000, services = {}, models = {}}: AppParams):
         console.log({service, name: services[service].name})
         registerService(app, models, service, services[service])
     })
-    
+
     app.listen(PORT, () => console.log('App started on port ' + PORT))
 
     return app

@@ -1,6 +1,7 @@
 import { Middleware } from "polka"
 
 export function onError(err: any, req: any, res: any, _next: any) {
+    console.log(err)
     res.end(JSON.stringify({
         code: err.code || err.status || 500,
         message: (err.length && err) || err.message
