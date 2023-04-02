@@ -36,6 +36,7 @@
         fields,
       });
 
+      console.log({result})
       if (result.data) {
         items = result.data;
         page = result.page;

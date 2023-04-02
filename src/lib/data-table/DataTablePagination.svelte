@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { Button, ButtonGroup, El } from "yesvelte";
-  import { Menu } from "@ubeac/svelte";
+  import { Button, ButtonGroup, Dropdown, DropdownItem, DropdownMenu, El } from "yesvelte";
 
   export let page: number = 1;
   export let perPage: number = 10;
@@ -22,24 +21,22 @@
   alignItems="center"
   justifyContent="between"
 >
-  <El d="flex" alignItems="center" gap="2">
-    <Button>
+  <Dropdown d="flex" alignItems="center" gap="2">
+    <Button slot="target">
       Show in Page: {perPage}
     </Button>
-    <Menu placement="bottom-start">
+    <DropdownMenu>
       {#each perPageOptions as option}
-        <a
-          class="dropdown-item"
-          href="/"
-          on:click|preventDefault={() => (total = option)}>{option}</a
-        >
+        <DropdownItem on:click={() => total=option}>
+          {option}
+        </DropdownItem>
       {/each}
-    </Menu>
-    <El>
+    </DropdownMenu>
+  </Dropdown>
+  <El>
       Showing {perPage * (page - 1) + 1} - {perPage * page + 1}
       from {total}
       items
-    </El>
   </El>
   <El>
     <ButtonGroup>

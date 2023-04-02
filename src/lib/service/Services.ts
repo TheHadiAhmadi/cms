@@ -9,7 +9,7 @@ type User = {
 
 class UserServiceClass extends BaseService<User> {
   constructor() {
-    super("/users");
+    super("/user");
   }
 }
 

@@ -76,6 +76,6 @@ export class BaseService<T> {
 
     query = query.substring(0, query.length - 1);
 
-    return this.fetch<IList<T>>(query);
+    return this.fetch<IList<T>>('/query', 'POST');
   }
 }

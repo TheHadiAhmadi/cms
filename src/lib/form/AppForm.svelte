@@ -3,6 +3,7 @@
   import type { FormContext } from "./Form.types";
   import { writable } from "svelte/store";
   import AppFormObject from "./AppFormObject.svelte";
+  import { El } from "yesvelte";
 
   const dispatch = createEventDispatcher();
 
@@ -52,6 +53,7 @@
   setContext("FORM", { register, unregister, errors, dirty });
 
   async function onSubmit(e: any) {
+    e.preventDefault()
     try {
       await validate();
       if (Object.keys(validationErrors).length === 0) {
@@ -79,8 +81,8 @@
   });
 </script>
 
-<form novalidate on:reset={onReset} on:submit|preventDefault={onSubmit}>
+<El {...$$restProps} tag="form" novalidate on:reset={onReset} on:submit={onSubmit}>
   <AppFormObject name="main">
     <slot form={form["main"]} />
   </AppFormObject>
-</form>
+</El>

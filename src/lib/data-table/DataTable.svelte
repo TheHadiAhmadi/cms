@@ -7,9 +7,11 @@
     TableBody,
     TableHead,
     Button,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
     Icon,
   } from "yesvelte";
-  import { Menu } from "@ubeac/svelte";
   import { tick } from "svelte";
   import type { SortParams } from "../service/base/BaseService";
   import type {
@@ -252,16 +254,21 @@
                         {/each}
                       </El>
                     {:else}
+                    <Dropdown>
+
+
                       <DataTableActionButton button={actions.dropdownButton} />
 
-                      <Menu>
+                      <DropdownMenu>
                         {#each actions.buttons(item) as button}
                           <DataTableActionButton
                             {button}
                             on:click={() => button.onClick?.(item)}
                           />
                         {/each}
-                      </Menu>
+                      </DropdownMenu>
+                    </Dropdown>
+
                     {/if}
                   </TableCell>
                 {/if}

@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { Button, Icon } from "yesvelte";
+  import { Button, DropdownItem, Icon } from "yesvelte";
   import type { DataTableActionButton } from "./DataTable.types";
 
   export let button: DataTableActionButton<any> | undefined = undefined;
 </script>
 
 {#if button}
-  <Button size="sm" {...button.props} on:click>
+  <DropdownItem size="sm" {...button.props} on:click>
     {#if button.icon}
       {@const name =
         typeof button.icon === "object" ? button.icon.name : button.icon}
@@ -17,5 +17,5 @@
     {#if button.text}
       {button.text}
     {/if}
-  </Button>
+      </DropdownItem>
 {/if}

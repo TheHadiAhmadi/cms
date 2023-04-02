@@ -13,8 +13,7 @@ import { existsSync } from 'fs';
 
 
 const output = rollup({
-    input: './src/server.ts',
-    // external: ['polka', 'cors'],
+    input: './server.ts',
     plugins: [
         typescript(),
         resolve(),

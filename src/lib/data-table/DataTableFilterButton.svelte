@@ -8,9 +8,10 @@
     Card,
     CardBody,
     RadioGroup,
+    Dropdown,
+    DropdownMenu,
   } from "yesvelte";
   import { createEventDispatcher } from "svelte";
-  import { Menu } from "@ubeac/svelte";
 
   export let key: any | undefined = undefined;
   export let label: any | undefined = undefined;
@@ -58,8 +59,8 @@
   }
 </script>
 
-<El>
-  <Button border>
+<Dropdown>
+  <Button slot="target" border>
     <El textMuted>
       {label}:
     </El>
@@ -70,7 +71,7 @@
     {/if}
     <Icon pack="mdi" name="chevron-down" />
   </Button>
-  <Menu p="2" persistent trigger="click" placement="bottom-start">
+  <DropdownMenu p="2" autoClose="outside" placement="bottom-start">
     {#if type === "text"}
       <RadioGroup inline items={["Like", "Equal"]} bind:value={operatorValue} />
       <Input placeholder="Type something..." bind:value={inputValue} />
@@ -101,5 +102,5 @@
         bind:value={selectValue}
       />
     {/if}
-  </Menu>
-</El>
+  </DropdownMenu>
+</Dropdown>

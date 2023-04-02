@@ -1,4 +1,5 @@
-import type { ButtonProps } from "@ubeac/svelte/components/Button/Button.svelte";
+import type { ComponentProps } from "svelte";
+import  { Button } from "yesvelte";
 
 type SelectItems =
   | {
@@ -31,7 +32,7 @@ export type DataTableHeader<T = any> = {
 export type DataTableActionButton<T> = {
   icon?: string | { name: string; pack: string };
   text?: string;
-  props?: ButtonProps;
+  props?: ComponentProps<Button>;
   onClick?: (item: T) => void;
 };
 
